@@ -2,7 +2,7 @@ prompter
 ========
 
 .. image:: https://travis-ci.org/tylerdave/prompter.svg?branch=master
-        :target:https://travis-ci.org/tylerdave/prompter
+  :target: https://travis-ci.org/tylerdave/prompter
 
 Simple CUI prompt input for Python
 
