@@ -3,6 +3,13 @@ prompter
 
 Simple CUI prompt input for Python
 
+Installing
+----------
+
+Install the latest from master:
+
+  pip install git+git://github.com/tylerdave/prompter
+
 Usage
 -----
 
