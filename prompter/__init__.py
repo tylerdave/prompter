@@ -7,18 +7,13 @@ __license__ = 'MIT'
 __copyright__ = 'Copyright 2014 Dave Forgac'
 
 
-# nasty hack while we need to support python 2.7 and 3.x :-(
-try:
-    raw_input
-except NameError:
-    import builtins
-
-    original_input = builtins.input
-    del builtins.input
-    def raw_input(*args, **kwargs):
-        return original_input(*args, **kwargs)
-    builtins.raw_input = raw_input
-
+# hack while we need to support python 2.6, 2.7 and 3+ :-(
+def get_input(message):
+    try:
+        return raw_input(message)
+    except NameError:
+        import builtins
+        return input(message)
 
 def prompt(message, default=None, strip=True):
     print(message)
@@ -27,7 +22,7 @@ def prompt(message, default=None, strip=True):
     else:
         prompt_text = "> "
 
-    input_value = raw_input(prompt_text)
+    input_value = get_input(prompt_text)
 
     if input_value and strip:
         input_value = input_value.strip()
