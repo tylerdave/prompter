@@ -10,7 +10,7 @@ Install the latest from master:
 
   pip install git+git://github.com/tylerdave/prompter
 
-Usage
+Using
 -----
 
   >>> from prompter import prompt
@@ -20,10 +20,10 @@ Usage
   > Dave
   'Dave'
 
-  >>> prompt('What is your name?', default='Dave Forgac')
+  >>> prompt('What is your name?', default='Dave')
   What is your name?
-  [Dave Forgac] > 
-  'Dave Forgac'
+  [Dave] > 
+  'Dave'
 
   >>> prompt('Enter text surrounded by spaces:', strip=False)
   Enter text surrounded by spaces:
