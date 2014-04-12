@@ -27,5 +27,5 @@ Using
 
   >>> prompt('Enter text surrounded by spaces:', strip=False)
   Enter text surrounded by spaces:
-  >       test  
-  '      test  '
+  >       text  
+  '      text  '
