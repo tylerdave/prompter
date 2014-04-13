@@ -28,8 +28,10 @@ Usage:
 """
 from __future__ import print_function
 
+import re
+
 __title__ = 'prompter'
-__version__ = '0.2.2'
+__version__ = '0.3.0'
 __author__ = 'Dave Forgac'
 __license__ = 'MIT'
 __copyright__ = 'Copyright 2014 Dave Forgac'
@@ -58,3 +60,34 @@ def prompt(message, default=None, strip=True):
         input_value = default
 
     return input_value
+
+def yesno(message, default='yes'):
+    """ Prompt user to answer yes or no. Return True if the default is chosen,
+     otherwise False. """
+    if default == 'yes':
+        yesno_prompt = '[Y/n]'
+    elif default == 'no':
+        yesno_prompt = '[y/N]'
+    else:
+        raise ValueError("default must be 'yes' or 'no'.")
+
+    if message:
+        print ("{0} {1} ".format(message, yesno_prompt))
+    else:
+        print ("{0} ".format(yesno_prompt))
+
+    while True:
+        response = get_input().strip()
+        if response == '':
+            return True
+        else:
+            if re.match('^(y)(es)?$', response, re.IGNORECASE):
+                if default == 'yes':
+                    return True
+                else:
+                    return False
+            elif re.match('^(n)(o)?$', response, re.IGNORECASE):
+                if default == 'no':
+                    return True
+                else:
+                    return False
