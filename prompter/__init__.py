@@ -12,7 +12,6 @@ def get_input(message):
     try:
         return raw_input(message)
     except NameError:
-        import builtins
         return input(message)
 
 def prompt(message, default=None, strip=True):
