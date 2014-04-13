@@ -22,7 +22,7 @@ Using
 
 ::
 
-  >>> from prompter import prompt
+  >>> from prompter import prompt, yesno
 
   >>> prompt('What is your name?')
   What is your name?
@@ -38,3 +38,19 @@ Using
   Enter text surrounded by spaces:
   >       text  
   '      text  '
+
+  >>> yesno('Time for a beer?')
+  Time for a beer? [Y/n] 
+  True
+
+  >>> yesno('Time for a beer?')
+  Time for a beer? [Y/n] no
+  False
+
+  >>> yesno('Time for a beer?', default='no')
+  Time for a beer? [y/N] 
+  True
+
+  >>> yesno('Time for a beer?', default='no')
+  Time for a beer? [y/N] y
+  False
