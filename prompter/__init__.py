@@ -43,13 +43,12 @@ def get_input(message=None):
     except NameError:
         return input(message)
 
-def prompt(message, default=None, strip=True):
+def prompt(message, default=None, strip=True, suffix=' > '):
     """ Print a message and prompt user for input. Return user input. """
-    print(message)
     if default is not None:
-        prompt_text = "[{0}] > ".format(default)
+        prompt_text = "{0} [{1}]{2}".format(message, default, suffix)
     else:
-        prompt_text = "> "
+        prompt_text = "{0}{1}".format(message, suffix)
 
     input_value = get_input(prompt_text)
 
