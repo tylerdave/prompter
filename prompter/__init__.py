@@ -36,7 +36,7 @@ __author__ = 'Dave Forgac'
 __license__ = 'MIT'
 __copyright__ = 'Copyright 2014 Dave Forgac'
 
-def get_input(message):
+def get_input(message=None):
     """ Get user input using raw_input() for Python 2.x and input() for 3.x. """
     try:
         return raw_input(message)
