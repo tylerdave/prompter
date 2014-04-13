@@ -29,7 +29,7 @@ Usage:
 from __future__ import print_function
 
 __title__ = 'prompter'
-__version__ = '0.1.1'
+__version__ = '0.2.1'
 __author__ = 'Dave Forgac'
 __license__ = 'MIT'
 __copyright__ = 'Copyright 2014 Dave Forgac'
