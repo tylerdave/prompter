@@ -39,18 +39,23 @@ Using
   >       text  
   '      text  '
 
-  >>> yesno('Time for a beer?')
-  Time for a beer? [Y/n] 
+  >>> yesno('Really?')
+  Really? [Y/n]
   True
 
-  >>> yesno('Time for a beer?')
-  Time for a beer? [Y/n] no
+  >>> yesno('Really?')
+  Really? [Y/n] no
   False
 
-  >>> yesno('Time for a beer?', default='no')
-  Time for a beer? [y/N] 
+  >>> yesno('Really?', default='no')
+  Really? [y/N]
   True
 
-  >>> yesno('Time for a beer?', default='no')
-  Time for a beer? [y/N] y
+  >>> yesno('Really?', default='no')
+  Really? [y/N] y
   False
+
+  >>> yesno('')
+  [Y/n] No
+  False
+

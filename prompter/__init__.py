@@ -31,7 +31,7 @@ from __future__ import print_function
 import re
 
 __title__ = 'prompter'
-__version__ = '0.3.1'
+__version__ = '0.3.2'
 __author__ = 'Dave Forgac'
 __license__ = 'MIT'
 __copyright__ = 'Copyright 2014 Dave Forgac'
@@ -71,13 +71,13 @@ def yesno(message, default='yes'):
     else:
         raise ValueError("default must be 'yes' or 'no'.")
 
-    if message:
-        print ("{0} {1} ".format(message, yesno_prompt))
+    if message != '':
+        prompt_text = "{0} {1} ".format(message, yesno_prompt)
     else:
-        print ("{0} ".format(yesno_prompt))
+        prompt_text = "{0} ".format(yesno_prompt)
 
     while True:
-        response = get_input().strip()
+        response = get_input(prompt_text).strip()
         if response == '':
             return True
         else:
