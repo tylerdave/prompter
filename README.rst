@@ -9,16 +9,18 @@ Simple CUI prompt input for Python
 Installing
 ----------
 
-Install the latest stable from PyPi:
+Install the latest stable from PyPi::
 
-  pip install prompter
+ pip install prompter
 
-Install the latest development version from master:
+Install the latest development version from master::
 
   pip install git+git://github.com/tylerdave/prompter
 
 Using
 -----
+
+::
 
   >>> from prompter import prompt
 
