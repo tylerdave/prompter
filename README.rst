@@ -4,6 +4,9 @@ prompter
 .. image:: https://travis-ci.org/tylerdave/prompter.svg?branch=master
   :target: https://travis-ci.org/tylerdave/prompter
 
+.. image:: http://badge.fury.io/py/prompter.svg
+  :target: http://badge.fury.io/py/prompter
+
 Simple CUI prompt input for Python
 
 Installing
