@@ -31,7 +31,7 @@ from __future__ import print_function
 import re
 
 __title__ = 'prompter'
-__version__ = '0.3.0'
+__version__ = '0.3.1'
 __author__ = 'Dave Forgac'
 __license__ = 'MIT'
 __copyright__ = 'Copyright 2014 Dave Forgac'
