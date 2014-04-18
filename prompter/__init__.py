@@ -6,22 +6,40 @@ Prompter is a tool for displaying simple input prompts with optional defaults.
 
 Usage:
 
-  >>> from prompter import prompt
+    >>> from prompter import prompt, yesno
 
-  >>> prompt('What is your name?')
-  What is your name?
-  > Dave
-  'Dave'
+    >>> prompt('What is your name?')
+    What is your name? Dave
+    'Dave'
 
-  >>> prompt('What is your name?', default='Dave')
-  What is your name?
-  [Dave] >
-  'Dave'
+    >>> prompt('What is your name?', default='Jenn')
+    What is your name? [Jenn]
+    'Jenn'
 
-  >>> prompt('Enter text surrounded by spaces:', strip=False)
-  Enter text surrounded by spaces:
-  >       text
-  '      text  '
+    >>> prompt('What is your name?', default='Jenn', suffix='\n > ')
+    What is your name? [Jenn]
+     >
+    'Jenn'
+
+    >>> prompt('Enter text surrounded by spaces.', strip=False)
+    Enter text surrounded by spaces.    text
+    '   text   '
+
+    >>> yesno('Really?')
+    Really? [Y/n]
+    True
+
+    >>> yesno('Really?')
+    Really? [Y/n] no
+    False
+
+    >>> yesno('Really?', default='no')
+    Really? [y/N]
+    True
+
+    >>> yesno('')
+    [Y/n] n
+    False
 
 :copyright: (c) 2014 by Dave Forgac
 :license: MIT, see LICENSE file for details
@@ -31,7 +49,7 @@ from __future__ import print_function
 import re
 
 __title__ = 'prompter'
-__version__ = '0.3.3'
+__version__ = '0.3.4'
 __author__ = 'Dave Forgac'
 __license__ = 'MIT'
 __copyright__ = 'Copyright 2014 Dave Forgac'
@@ -43,7 +61,7 @@ def get_input(message=None):
     except NameError:
         return input(message)
 
-def prompt(message, default=None, strip=True, suffix=' > '):
+def prompt(message, default=None, strip=True, suffix=' '):
     """ Print a message and prompt user for input. Return user input. """
     if default is not None:
         prompt_text = "{0} [{1}]{2}".format(message, default, suffix)
@@ -60,7 +78,7 @@ def prompt(message, default=None, strip=True, suffix=' > '):
 
     return input_value
 
-def yesno(message, default='yes'):
+def yesno(message, default='yes', suffix=' '):
     """ Prompt user to answer yes or no. Return True if the default is chosen,
      otherwise False. """
     if default == 'yes':
@@ -71,9 +89,9 @@ def yesno(message, default='yes'):
         raise ValueError("default must be 'yes' or 'no'.")
 
     if message != '':
-        prompt_text = "{0} {1} ".format(message, yesno_prompt)
+        prompt_text = "{0} {1}{2}".format(message, yesno_prompt, suffix)
     else:
-        prompt_text = "{0} ".format(yesno_prompt)
+        prompt_text = "{0}{1}".format(yesno_prompt, suffix)
 
     while True:
         response = get_input(prompt_text).strip()

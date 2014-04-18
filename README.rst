@@ -29,19 +29,21 @@ Using
   >>> from prompter import prompt, yesno
 
   >>> prompt('What is your name?')
-  What is your name?
-  > Dave
+  What is your name? Dave
   'Dave'
 
-  >>> prompt('What is your name?', default='Dave')
-  What is your name?
-  [Dave] > 
-  'Dave'
+  >>> prompt('What is your name?', default='Jenn')
+  What is your name? [Jenn]
+  'Jenn'
 
-  >>> prompt('Enter text surrounded by spaces:', strip=False)
-  Enter text surrounded by spaces:
-  >       text  
-  '      text  '
+  >>> prompt('What is your name?', default='Jenn', suffix='\n > ')
+  What is your name? [Jenn]
+  >
+  'Jenn'
+
+  >>> prompt('Enter text surrounded by spaces.', strip=False)
+  Enter text surrounded by spaces.    text
+  '   text   '
 
   >>> yesno('Really?')
   Really? [Y/n]
@@ -55,12 +57,8 @@ Using
   Really? [y/N]
   True
 
-  >>> yesno('Really?', default='no')
-  Really? [y/N] y
-  False
-
   >>> yesno('')
-  [Y/n] No
+  [Y/n] n
   False
 
 Note
