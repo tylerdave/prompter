@@ -64,6 +64,5 @@ Using
 Note
 ----
 
-Don't be surprised if the behavior changes in later versions as this is a work
-in progress. Please open an issue on Github if you notice problems or have
-suggestions.
+Please open an issue on Github if you notice problems or have
+suggestions!
