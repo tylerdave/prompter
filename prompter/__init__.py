@@ -49,10 +49,12 @@ from __future__ import print_function
 import re
 
 __title__ = 'prompter'
-__version__ = '0.3.5'
 __author__ = 'Dave Forgac'
 __license__ = 'MIT'
 __copyright__ = 'Copyright 2014 Dave Forgac'
+from ._version import get_versions
+__version__ = get_versions()['version']
+del get_versions
 
 def get_input(message=None):
     """ Get user input using raw_input() for Python 2.x and input() for 3.x. """
@@ -108,3 +110,4 @@ def yesno(message, default='yes', suffix=' '):
                     return True
                 else:
                     return False
+
