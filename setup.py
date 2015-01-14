@@ -5,7 +5,7 @@ from setuptools import setup, find_packages
 versioneer.VCS = 'git'
 versioneer.versionfile_source = 'prompter/_version.py'
 versioneer.versionfile_build = 'prompter/_version.py'
-versioneer.tag_prefix = 'v'
+versioneer.tag_prefix = ''
 versioneer.parentdir_prefix = 'prompter-'
 
 with open('README.rst') as f:
