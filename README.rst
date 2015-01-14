@@ -24,7 +24,7 @@ Install the latest development version from master::
 Using
 -----
 
-::
+.. code-block:: python
 
   >>> from prompter import prompt, yesno
 
