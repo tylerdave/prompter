@@ -7,6 +7,8 @@ prompter
 .. image:: http://badge.fury.io/py/prompter.png
   :target: http://badge.fury.io/py/prompter
 
+.. image:: https://coveralls.io/repos/tylerdave/prompter/badge.svg?branch=master
+  :target: https://coveralls.io/r/tylerdave/prompter?branch=master 
 
 Simple CUI prompt input for Python
 
