@@ -2,6 +2,7 @@
 LICENSE
 README.rst
 requirements.txt
+setup.cfg
 setup.py
 tox.ini
 versioneer.py
