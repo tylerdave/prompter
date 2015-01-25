@@ -1,5 +1,2 @@
 [report]
-omit =
-    */python?.?/*
-    */site-packages/nose/*
-    */_version.py
+omit = prompter/_version.py
