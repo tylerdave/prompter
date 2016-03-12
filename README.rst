@@ -12,7 +12,7 @@ prompter
 
 Simple CUI prompt input for Python
 
-I mostly use click for CLI stuff now so I suggest taking a look here if you need anything more advanced: http://click.pocoo.org/5/prompts/
+I mostly use click for CLI stuff now so I suggest taking a look here if you need anything more advanced: http://click.pocoo.org/latest/prompts/
 
 Installing
 ----------
