@@ -56,37 +56,57 @@ from ._version import get_versions
 __version__ = get_versions()['version']
 del get_versions
 
+
 def get_input(message=None):
-    """ Get user input using raw_input() for Python 2.x and input() for 3.x. """
+    """
+    Get user input using raw_input() for Python 2.x and input() for 3.x.
+    """
     try:
         return raw_input(message)
     except NameError:
         return input(message)
 
-def prompt(message, default=None, strip=True, suffix=' '):
-    """ Print a message and prompt user for input. Return user input. """
+
+def prompt(
+    message, default=None, strip=True, suffix=' ', input_required=True
+):
+    """
+    Print a message and prompt user for input. Return user input.
+    """
     if default is not None:
         prompt_text = "{0} [{1}]{2}".format(message, default, suffix)
     else:
         prompt_text = "{0}{1}".format(message, suffix)
 
-    input_value = get_input(prompt_text)
+    while True:
+        input_value = get_input(prompt_text)
 
-    if input_value and strip:
-        input_value = input_value.strip()
+        if input_value and strip:
+            input_value = input_value.strip()
 
-    if not input_value:
-        input_value = default
+        if not input_value:
+            input_value = default
+
+        if (
+            (input_required is False) or
+            (input_required is True and input_value is not None)
+        ):
+            break
 
     return input_value
 
-def yesno(message, default='yes', suffix=' '):
-    """ Prompt user to answer yes or no. Return True if the default is chosen,
-     otherwise False. """
+
+def yesno(message, default=None, suffix=' '):
+    """
+    Prompt user to answer yes or no. Return True if the default is chosen,
+    otherwise False.
+    """
     if default == 'yes':
         yesno_prompt = '[Y/n]'
     elif default == 'no':
         yesno_prompt = '[y/N]'
+    elif default is None:
+        yesno_prompt = '[y/n]'
     else:
         raise ValueError("default must be 'yes' or 'no'.")
 
@@ -96,18 +116,9 @@ def yesno(message, default='yes', suffix=' '):
         prompt_text = "{0}{1}".format(yesno_prompt, suffix)
 
     while True:
-        response = get_input(prompt_text).strip()
-        if response == '':
-            return True
-        else:
+        response = get_input(prompt_text).strip() or default or ""
+        if response != "":
             if re.match('^(y)(es)?$', response, re.IGNORECASE):
-                if default == 'yes':
-                    return True
-                else:
-                    return False
+                return True
             elif re.match('^(n)(o)?$', response, re.IGNORECASE):
-                if default == 'no':
-                    return True
-                else:
-                    return False
-
+                return False
