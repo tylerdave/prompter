@@ -47,6 +47,8 @@ Usage:
 from __future__ import print_function
 
 import re
+import os
+import readline
 
 __title__ = 'prompter'
 __author__ = 'Dave Forgac'
@@ -89,7 +91,7 @@ def prompt(
 
         if (
             (input_required is False) or
-            (input_required is True and input_value is not None)
+            ((input_required is True) and (input_value is not None))
         ):
             break
 
@@ -122,3 +124,70 @@ def yesno(message, default=None, suffix=' '):
                 return True
             elif re.match('^(n)(o)?$', response, re.IGNORECASE):
                 return False
+
+
+def _filesystem(
+    message, default=None, strip=True, suffix=' ', input_required=True,
+    must_exist=True, tab_completion=True, ftype="file"
+):
+    """
+    internal helper function that print a message and
+    prompt user for input of a filename/directory.
+    Return user input.
+    """
+    if ftype not in ("file", "directory"):
+        raise ValueError("ftype must be 'file' or 'directory'.")
+
+    if tab_completion:
+        # activate tab completion; remove delimiter for file system access
+        readline.set_completer_delims(
+            readline.get_completer_delims().replace("/", "")
+        )
+        readline.parse_and_bind('tab: complete')
+
+    while True:
+        filename = prompt(message, default, strip, suffix, input_required)
+        if must_exist is True:
+            if not os.path.exists(filename):
+                print("'{}' does not exist!".format(filename))
+                continue
+            elif ftype == "file" and not os.path.isfile(filename):
+                print("'{}' is not a file!".format(filename))
+                continue
+            elif ftype == "directory" and not os.path.isdir(filename):
+                print("'{}' is not a directory!".format(filename))
+                continue
+
+        if tab_completion:
+            # deactivate tab completion
+            readline.parse_and_bind('tab: self-insert')
+
+        return filename
+
+
+def file(
+    message, default=None, strip=True, suffix=' ', input_required=True,
+    must_exist=True, tab_completion=True
+):
+    """
+    Print a message and prompt user for input of a filename
+    Return user input.
+    """
+    return _filesystem(
+        message, default, strip, suffix, input_required,
+        must_exist, tab_completion, ftype="file"
+    )
+
+
+def directory(
+    message, default=None, strip=True, suffix=' ', input_required=True,
+    must_exist=True, tab_completion=True
+):
+    """
+    Print a message and prompt user for input of a directory.
+    Return user input.
+    """
+    return _filesystem(
+        message, default, strip, suffix, input_required,
+        must_exist, tab_completion, ftype="directory"
+    )
