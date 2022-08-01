@@ -80,15 +80,17 @@ def prompt(message, default=None, strip=True, suffix=' '):
 
     return input_value
 
-def yesno(message, default='yes', suffix=' '):
-    """ Prompt user to answer yes or no. Return True if the default is chosen,
-     otherwise False. """
+def yesno(message, default=None, suffix=' '):
+    """ Prompt user to answer yes or no. Return True for yes and False for
+     no. """
     if default == 'yes':
         yesno_prompt = '[Y/n]'
     elif default == 'no':
         yesno_prompt = '[y/N]'
+    elif default == None:
+        yesno_prompt = '[y/n]'
     else:
-        raise ValueError("default must be 'yes' or 'no'.")
+        raise ValueError("default must be 'yes' or 'no', or None.")
 
     if message != '':
         prompt_text = "{0} {1}{2}".format(message, yesno_prompt, suffix)
@@ -98,16 +100,10 @@ def yesno(message, default='yes', suffix=' '):
     while True:
         response = get_input(prompt_text).strip()
         if response == '':
+            response = default
+
+        if re.match('^(y)(es)?$', response, re.IGNORECASE):
             return True
-        else:
-            if re.match('^(y)(es)?$', response, re.IGNORECASE):
-                if default == 'yes':
-                    return True
-                else:
-                    return False
-            elif re.match('^(n)(o)?$', response, re.IGNORECASE):
-                if default == 'no':
-                    return True
-                else:
-                    return False
+        elif re.match('^(n)(o)?$', response, re.IGNORECASE):
+            return False
 
