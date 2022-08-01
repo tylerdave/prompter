@@ -1,6 +1,8 @@
 from mock import patch
-from nose.tools import assert_equals
 from prompter import yesno
+
+import pytest
+
 
 YESNO_COMBINATIONS = [
     ('yes', 'yes', True),
@@ -14,27 +16,24 @@ YESNO_COMBINATIONS = [
     ('yes', 'No', False),
     ('yes', 'n', False),
     ('yes', 'N', False),
-    ('no', 'yes', False),
-    ('no', 'YES', False),
-    ('no', 'Yes', False),
-    ('no', 'y', False),
-    ('no', 'Y', False),
-    ('no', '', True),
-    ('no', 'no', True),
-    ('no', 'NO', True),
-    ('no', 'No', True),
-    ('no', 'n', True),
-    ('no', 'N', True),
+    ('no', 'yes', True),
+    ('no', 'YES', True),
+    ('no', 'Yes', True),
+    ('no', 'y', True),
+    ('no', 'Y', True),
+    ('no', '', False),
+    ('no', 'no', False),
+    ('no', 'NO', False),
+    ('no', 'No', False),
+    ('no', 'n', False),
+    ('no', 'N', False),
     ]
 
-def test_yesno_combinations():
-    for (default, value, expected_result) in YESNO_COMBINATIONS:
-        yield yesno_checker, default, value, expected_result
-
-def yesno_checker(default, value, expected_result):
+@pytest.mark.parametrize("default,value,expected_result", YESNO_COMBINATIONS)
+def test_yesno(default, value, expected_result):
     with patch('prompter.get_input', return_value=value):
         returned_value = yesno('Does this work?', default=default)
-        assert_equals(returned_value, expected_result)
+        assert returned_value == expected_result
 
 #@patch('prompter.get_input', return_value='        ')
 #def test_prompt_returns_default_with_only_whitespace_input(mock_raw_input):
